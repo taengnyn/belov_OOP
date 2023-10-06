@@ -60,8 +60,8 @@ class StringCalculatorTest {
 
     @Test
     void checkDelimeter(){
-        assertEquals(6, calc.add("//<\n1<2<3"));
-        assertEquals(6, calc.add("//;\n1;2;3"));
+        assertEquals(6, calc.add("//[<]\n1<2<3"));
+        assertEquals(6, calc.add("//[;]\n1;2;3"));
     }
 
     @Test
@@ -80,9 +80,16 @@ class StringCalculatorTest {
 
     @Test
     void custDelimeters() {
-        assertEquals(1999, calc.add("//(*&^&^%&^)\n1000(*&^&^%&^)999(*&^&^%&^)(*&^&^%&^)1001"));
-        assertEquals(121, calc.add("//*\n100*8172**21"));
+        assertEquals(1999, calc.add("//[(*&^&^%&^)]\n1000(*&^&^%&^)999(*&^&^%&^)(*&^&^%&^)1001"));
+        assertEquals(121, calc.add("//[*]\n100*8172**21"));
         assertThrows(IllegalArgumentException.class,() -> calc.add("8owe3,2937,126"));
+    }
+
+    @Test
+    void multipDelimeters() {
+        assertEquals(6, calc.add("//[%][*]\n1%2*3"));
+        assertEquals(337, calc.add("//[*%&^%^&][*/*/][???]\n100*%&^%^&8172*/*/21???216"));
+        assertEquals(137, calc.add("//[&&&][+++][yu]\n8&&&3+++2937yu126"));
     }
 
 }

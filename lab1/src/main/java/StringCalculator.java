@@ -11,7 +11,8 @@ public class StringCalculator {
         if (numbers.startsWith("//")) {
             int endOfDelimiter = numbers.indexOf("\n");
             String custDelimiter = numbers.substring(2, endOfDelimiter);
-            delimiter = Pattern.quote(custDelimiter);
+            String regex = Pattern.quote(custDelimiter.replaceAll("\\[|\\]", "|"));
+            delimiter = regex;
             numbers = numbers.substring(endOfDelimiter + 1);
         }
 
