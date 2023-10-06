@@ -5,18 +5,16 @@ public class StringCalculator {
                 return 0;
             }
 
-            String[] nums = numbers.split(",");
-            int sum = 0;
-
-            for (String num : nums) {
-                try {
-                    int i = Integer.parseInt(num);
-                    sum += i;
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("Invalid input: '" + num + "' is not a valid number.");
-                }
+            if (!numbers.matches("\\d+([,\n]\\d+)*")) {
+                throw new IllegalArgumentException("Wrong input: " + numbers);
             }
 
+            String[] nums = numbers.split("[,|\n]+");
+            int sum = 0;
+
+            for (String i : nums) {
+                sum += Integer.parseInt(i);
+            }
             return sum;
         }
 
