@@ -92,4 +92,12 @@ class StringCalculatorTest {
         assertEquals(137, calc.add("//[&&&][+++][yu]\n8&&&3+++2937yu126"));
     }
 
+    @Test
+    void longMultipDelimeters() {
+        assertEquals(6, calc.add("//[%%%%%%%%][**//**//**]\n1%%%%%%%%2**//**//**3"));
+        assertEquals(337, calc.add("//[*%&^%^&][*/*/][???]\n100*%&^%^&8172*/*/21???216"));
+        assertEquals(137, calc.add("//[&&&][+++][yuuytyghvhjj]\n8&&&3+++2937yuuytyghvhjj126"));
+        assertEquals(6, calc.add("//[*]\n1*2**3"));
+    }
+
 }
