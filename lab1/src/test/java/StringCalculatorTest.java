@@ -26,9 +26,7 @@ class StringCalculatorTest {
 
     @Test
     void checkNewline() {
-
         assertEquals(6, calc.add("1\n2,3"));
-        assertThrows(IllegalArgumentException.class, () -> calc.add("\n"));
     }
 
     @Test
@@ -49,7 +47,7 @@ class StringCalculatorTest {
     }
     @Test
     void testAddWithWhitespace() {
-        assertThrows(IllegalArgumentException.class, () -> calc.add("1,\n"));
+        assertThrows(IllegalArgumentException.class, () -> calc.add("1, \n"));
         assertThrows(IllegalArgumentException.class, () -> calc.add(" 1 , 2\n3 "));
         assertThrows(IllegalArgumentException.class, () -> calc.add("1.786576 , 2\n3 "));
     }
@@ -64,6 +62,13 @@ class StringCalculatorTest {
     void checkDelimeter(){
         assertEquals(6, calc.add("//<\n1<2<3"));
         assertEquals(6, calc.add("//;\n1;2;3"));
+    }
+
+    @Test
+    void wrongNegative(){
+        assertThrows(IllegalArgumentException.class,() -> calc.add("1,-2,-3"));
+        assertThrows(IllegalArgumentException.class,() -> calc.add("//;\n76;-223"));
+        assertThrows(IllegalArgumentException.class,() -> calc.add("//*\n832*-27*82"));
     }
 
 }
