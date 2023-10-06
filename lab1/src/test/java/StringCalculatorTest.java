@@ -78,4 +78,11 @@ class StringCalculatorTest {
         assertThrows(IllegalArgumentException.class,() -> calc.add("8owe3,2937,126"));
     }
 
+    @Test
+    void custDelimeters() {
+        assertEquals(1999, calc.add("//(*&^&^%&^)\n1000(*&^&^%&^)999(*&^&^%&^)(*&^&^%&^)1001"));
+        assertEquals(121, calc.add("//*\n100*8172**21"));
+        assertThrows(IllegalArgumentException.class,() -> calc.add("8owe3,2937,126"));
+    }
+
 }

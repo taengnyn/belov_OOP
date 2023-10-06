@@ -10,7 +10,8 @@ public class StringCalculator {
         String delimiter = ",|\n"; // default delimiter
         if (numbers.startsWith("//")) {
             int endOfDelimiter = numbers.indexOf("\n");
-            delimiter = numbers.substring(2, endOfDelimiter);
+            String custDelimiter = numbers.substring(2, endOfDelimiter);
+            delimiter = Pattern.quote(custDelimiter);
             numbers = numbers.substring(endOfDelimiter + 1);
         }
 
