@@ -1,4 +1,8 @@
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,8 +26,14 @@ class StringCalculatorTest {
     }
 
     @Test
-    public void testAddWithInvalidInput() {
-        assertThrows(IllegalArgumentException.class, () -> calc.add("1,2,3"));
-        assertThrows(NumberFormatException.class, () -> calc.add("1,abc"));
+    void addInvalidInput() {
+        StringCalculator stringCalc = new StringCalculator();
+        try {
+            int result = stringCalc.add("1,2,ор");
+            fail("Expected IllegalArgumentException, given " + result);
+        } catch (IllegalArgumentException e) {
+            // Очікуємо IllegalArgumentException
+        }
     }
+
 }
