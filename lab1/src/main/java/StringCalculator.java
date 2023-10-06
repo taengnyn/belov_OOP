@@ -5,18 +5,22 @@ public class StringCalculator {
                 return 0;
             }
 
-            if (!numbers.matches("\\d+([,\n]\\d+)*")) {
-                throw new IllegalArgumentException("Wrong input: " + numbers);
+            String delimiter = "[,|\n]"; // default delimiter
+            if (numbers.startsWith("//"))
+            {
+                delimiter = numbers.substring(2, numbers.indexOf("\n"));
+                numbers = numbers.substring(numbers.indexOf("\n") + 1);
             }
 
-            String[] nums = numbers.split("[,|\n]+");
+            if (!numbers.matches("\\d+("+delimiter+"\\d+)*")) {
+                throw new IllegalArgumentException("Wrong input: " + numbers);
+            }
             int sum = 0;
-
+            String[] nums = numbers.split(delimiter);
             for (String i : nums) {
                 sum += Integer.parseInt(i);
             }
             return sum;
         }
-
     }
 }

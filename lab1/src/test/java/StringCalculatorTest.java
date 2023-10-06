@@ -7,22 +7,9 @@ class StringCalculatorTest {
     StringCalculator calc = new StringCalculator();
 
     @Test
-    void isEmptyString() {
+    void checkWithRightInput() {
         assertEquals(0, calc.add(""));
-    }
-
-    @Test
-    void onlyNewline() {
-        assertThrows(IllegalArgumentException.class, () -> calc.add("\n"));
-    }
-
-    @Test
-    void isEqualsToTwo() {
         assertEquals(2, calc.add("2"));
-    }
-
-    @Test
-    void isEqualsToThree() {
         assertEquals(3, calc.add("1\n2"));
     }
 
@@ -39,20 +26,14 @@ class StringCalculatorTest {
 
     @Test
     void checkNewline() {
-        StringCalculator calc = new StringCalculator();
+
         assertEquals(6, calc.add("1\n2,3"));
+        assertThrows(IllegalArgumentException.class, () -> calc.add("\n"));
     }
 
     @Test
     void newlineFirstly() {
-        StringCalculator calc = new StringCalculator();
         assertThrows(IllegalArgumentException.class, () -> calc.add("\n2,3"));
-    }
-
-    @Test
-    void newlineWithoutNums() {
-        StringCalculator calc = new StringCalculator();
-        assertThrows(IllegalArgumentException.class, () -> calc.add("1,\n"));
     }
 
     @Test
@@ -64,14 +45,25 @@ class StringCalculatorTest {
             fail("Expected IllegalArgumentException, given " + result);
         } catch (IllegalArgumentException e) {
             assertThrows(IllegalArgumentException.class, () -> calc.add("**&^ор"));
-
-
         }
     }
     @Test
     void testAddWithWhitespace() {
-        StringCalculator calc = new StringCalculator();
+        assertThrows(IllegalArgumentException.class, () -> calc.add("1,\n"));
         assertThrows(IllegalArgumentException.class, () -> calc.add(" 1 , 2\n3 "));
         assertThrows(IllegalArgumentException.class, () -> calc.add("1.786576 , 2\n3 "));
     }
+
+    @Test
+    void wrongDelimeter(){
+        assertThrows(IllegalArgumentException.class,() -> calc.add("\\12345"));
+        assertThrows(IllegalArgumentException.class,() -> calc.add("//<\n1sdcs<2<3"));
+    }
+
+    @Test
+    void checkDelimeter(){
+        assertEquals(6, calc.add("//<\n1<2<3"));
+        assertEquals(6, calc.add("//;\n1;2;3"));
+    }
+
 }
