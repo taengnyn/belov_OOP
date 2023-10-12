@@ -13,18 +13,15 @@ public class StringCalculator {
             if (numbers.startsWith("//"))
             {
 
-                Matcher matcher = Pattern.compile("//(.*?)\\n").matcher(numbers);
+                Matcher matcher = Pattern.compile("//\\[(.*?)\\]\n").matcher(numbers);
                 if (matcher.find()) {
                     customDelimiter = matcher.group(1);
-                    if (customDelimiter.length() == 1) {
-                        numbersString = numbers.substring(numbers.indexOf("\n") + 1);
-                    } else {
+                    numbersString = numbers.substring(numbers.indexOf("\n") + 1);
+                }
+                else {
                         throw new IllegalArgumentException("Invalid custom delimiter: " + customDelimiter);
                     }
-                }
-                else{
-                    throw new IllegalArgumentException("Wrong input: " + numbers);
-                }
+
             }
 
             String delimiterRegex = ",|\n";

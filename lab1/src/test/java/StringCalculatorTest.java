@@ -59,15 +59,6 @@ class StringCalculatorTest {
     }
 
     @Test
-    void checkDelimeter() {
-        assertThrows(IllegalArgumentException.class, () -> calc.add("//<\n1<2<3<"));
-        assertEquals(6, calc.add("//;\n1;2;3"));
-        assertThrows(IllegalArgumentException.class, () -> calc.add("?\n1,4?3"));
-        assertThrows(IllegalArgumentException.class, () -> calc.add("//??\n1,4??3"));
-        assertEquals(6, calc.add("//;\n1;2;3"));
-    }
-
-    @Test
     void wrongNegative(){
         assertThrows(IllegalArgumentException.class,() -> calc.add("1,-2,-3"));
         assertThrows(IllegalArgumentException.class,() -> calc.add("//;\n76;-223"));
@@ -78,7 +69,17 @@ class StringCalculatorTest {
     void lessThanThousand() {
         assertEquals(1999, calc.add("1000,999,1001"));
         assertEquals(121, calc.add("100,8172,21"));
-        assertEquals(121, calc.add("//^\n100,8172^21"));
+        assertThrows(IllegalArgumentException.class,() -> calc.add("//[^^^]\n100,8172^21"));
         assertThrows(IllegalArgumentException.class,() -> calc.add("8owe3,2937,126"));
+    }
+
+    @Test
+    void checkDelimeter() {
+        assertThrows(IllegalArgumentException.class, () -> calc.add("//<\n1<2<3<"));
+        assertEquals(6, calc.add("//[;]\n1;2;3"));
+        assertThrows(IllegalArgumentException.class, () -> calc.add("?\n1,4?3"));
+        assertThrows(IllegalArgumentException.class, () -> calc.add("//??\n1,4??3"));
+        assertEquals(11, calc.add("//[;::]\n1,2\n3;::5"));
+        assertEquals(11, calc.add("//[*-]\n1,2\n3*-5"));
     }
 }
