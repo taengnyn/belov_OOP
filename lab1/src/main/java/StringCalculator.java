@@ -3,10 +3,6 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
     public int add(String numbers) {
-<<<<<<< HEAD
-        if (numbers.isEmpty()) {
-            return 0;
-=======
         {
             if (numbers.isEmpty()) {
                 return 0;
@@ -46,42 +42,7 @@ public class StringCalculator {
                 sum += Integer.parseInt(i);
             }
             return sum;
->>>>>>> 611f2c5 (Task4 of TDD Kata corrected)
         }
-
-        String delimiter = ",|\n"; // default delimiter
-        if (numbers.startsWith("//"))
-        {
-            int endOfDelimiter = numbers.indexOf("\n");
-            String custDelimiter = numbers.substring(2, endOfDelimiter);
-            String regex = Pattern.quote(custDelimiter.replaceAll("\\[|\\]", "|"));
-            delimiter = regex;
-            numbers = numbers.substring(endOfDelimiter + 1);
-        }
-
-        String regex = "[" + delimiter + "]+";
-        Pattern pattern = Pattern.compile(regex);
-        String[] nums = pattern.split(numbers);
-
-        int sum = 0;
-        StringBuilder negativNums = new StringBuilder();
-        for (String num : nums)
-        {
-            int intNum = Integer.parseInt(num);
-            if (intNum < 0)
-            {
-                negativNums.append(intNum).append(" ");
-            }
-            if(intNum <= 1000)
-            {
-                sum += intNum;
-            }
-        }
-        if (negativNums.length() > 0)
-        {
-            throw new IllegalArgumentException("Negative numbers not allowed: " + negativNums);
-        }
-        return sum;
     }
     /*public static void main(String[] args){
         StringCalculator stringCalc = new StringCalculator();
