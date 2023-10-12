@@ -76,10 +76,11 @@ class StringCalculatorTest {
     @Test
     void checkDelimeter() {
         assertThrows(IllegalArgumentException.class, () -> calc.add("//<\n1<2<3<"));
-        assertEquals(6, calc.add("//[;]\n1;2;3"));
+        assertEquals(6, calc.add("//[*][%]\n1*2%3"));
         assertThrows(IllegalArgumentException.class, () -> calc.add("?\n1,4?3"));
         assertThrows(IllegalArgumentException.class, () -> calc.add("//??\n1,4??3"));
-        assertEquals(11, calc.add("//[;::]\n1,2\n3;::5"));
-        assertEquals(11, calc.add("//[*-]\n1,2\n3*-5"));
+        assertEquals(22, calc.add("//[;::][*-]\n1,2\n3;::5,1,2\n3*-5"));
+        assertThrows(IllegalArgumentException.class, () -> calc.add("//\n"));
+        assertEquals(22, calc.add("//[eruvh][----][\\\\]\n1,2\n3eruvh5\\\\1,2\n3----5"));
     }
 }

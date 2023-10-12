@@ -7,26 +7,32 @@ public class StringCalculator {
             if (numbers.isEmpty()) {
                 return 0;
             }
-
             String numbersString = numbers;
             String customDelimiter = ",|\n";
             if (numbers.startsWith("//"))
             {
-
-                Matcher matcher = Pattern.compile("//\\[(.*?)\\]\n").matcher(numbers);
+                Matcher matcher = Pattern.compile("//(\\[.+\\])+\n").matcher(numbers);
                 if (matcher.find()) {
-                    customDelimiter = matcher.group(1);
+                    customDelimiter = "";
+                    String customDelimiters = matcher.group(1);
+
+                    Matcher delimiterMatch = Pattern.compile("\\[(.*?)\\]").matcher(customDelimiters);
+                    while (delimiterMatch.find()) {
+                        if (!customDelimiter.isEmpty()) {
+                            customDelimiter += "|";
+                        }
+                        customDelimiter += Pattern.quote(delimiterMatch.group(1));
+                    }
                     numbersString = numbers.substring(numbers.indexOf("\n") + 1);
                 }
                 else {
                         throw new IllegalArgumentException("Invalid custom delimiter: " + customDelimiter);
                     }
-
             }
 
             String delimiterRegex = ",|\n";
             if (!customDelimiter.isEmpty()) {
-                delimiterRegex += "|" + Pattern.quote(customDelimiter);
+                delimiterRegex += "|" + customDelimiter;
             }
 
             if (numbers.endsWith(customDelimiter) || numbers.endsWith("\n") || numbers.endsWith(",")) {
