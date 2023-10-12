@@ -73,4 +73,12 @@ class StringCalculatorTest {
         assertThrows(IllegalArgumentException.class,() -> calc.add("//;\n76;-223"));
         assertThrows(IllegalArgumentException.class,() -> calc.add("//*\n832*-27*82"));
     }
+
+    @Test
+    void lessThanThousand() {
+        assertEquals(1999, calc.add("1000,999,1001"));
+        assertEquals(121, calc.add("100,8172,21"));
+        assertEquals(121, calc.add("//^\n100,8172^21"));
+        assertThrows(IllegalArgumentException.class,() -> calc.add("8owe3,2937,126"));
+    }
 }
