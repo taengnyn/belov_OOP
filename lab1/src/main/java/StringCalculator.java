@@ -37,9 +37,17 @@ public class StringCalculator {
             }
 
             String[] numberArray = numbersString.split(delimiterRegex);
+            StringBuilder negatives = new StringBuilder();
             int sum = 0;
             for (String i : numberArray) {
-                sum += Integer.parseInt(i);
+                int intNum = Integer.parseInt(i);
+                if (intNum < 0) {
+                    negatives.append(intNum).append(" ");
+                }
+                sum += intNum;
+            }
+            if (negatives.length() > 0) {
+                throw new IllegalArgumentException("Negative numbers not allowed: " + negatives);
             }
             return sum;
         }
