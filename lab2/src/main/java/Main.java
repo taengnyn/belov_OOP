@@ -19,7 +19,29 @@ public class Main {
         System.out.println("Number of rows: " + numRows);
         System.out.println("Number of columns: " + numColumns);
         System.out.println("----Matrix----");
+        System.out.println("Matrix:");
         myMatrix.printMatrix();
+
+        // Створення пустої матриці
+        Matrix emptyMatrix = new Matrix();
+
+        // Виведення пустої матриці
+        System.out.println("Empty Matrix:");
+        emptyMatrix.printMatrix();
+
+        // Створення матриці 3x3 та заповнення її значеннями
+        Matrix matrix3x3 = new Matrix(3, 3);
+
+        // Виведення матриці 3x3
+        System.out.println("3x3 Matrix:");
+        matrix3x3.printMatrix();
+
+        // Створення копії матриці 3x3
+        Matrix copyMatrix = new Matrix(matrix3x3);
+
+        // Виведення копії матриці 3x3
+        System.out.println("Copy of 3x3 Matrix:");
+        copyMatrix.printMatrix();
     }
 }
 

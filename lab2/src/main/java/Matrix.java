@@ -1,21 +1,39 @@
 public class Matrix {
     private final int rows;
     private final int columns;
-    private final int[][] arr; // Двовимірний масив для збереження даних матриці
+    private final int[][] arr;
+
+
+    public Matrix() {
+        this(0, 0);
+    }
 
     public Matrix(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
         this.arr = new int[rows][columns];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                this.arr[i][j] = 0;
+            }
+        }
     }
 
-    //public void setRows(int i) { this.rows = i;}
+    public Matrix(Matrix otherMatrix) {
+        this.rows = otherMatrix.getRows();
+        this.columns = otherMatrix.getColumns();
+        this.arr = new int[rows][columns];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                this.arr[i][j] = otherMatrix.getElement(i, j);
+            }
+        }
+    }
 
     public int getRows() {
         return rows;
     }
 
-    //public void setColumns(int i) { this.columns = i;}
     public int getColumns() {
         return columns;
     }
@@ -45,4 +63,5 @@ public class Matrix {
         }
     }
 }
+
 
