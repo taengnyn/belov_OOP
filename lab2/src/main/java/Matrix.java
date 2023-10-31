@@ -4,10 +4,12 @@ public class Matrix {
     private final int[][] arr;
 
 
+    //пуста матриця розміром 0*0
     public Matrix() {
         this(0, 0);
     }
 
+    //заповнення матриці нулями(матриця заданого розміру)
     public Matrix(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
@@ -19,6 +21,7 @@ public class Matrix {
         }
     }
 
+    //копія іншої матриці
     public Matrix(Matrix otherMatrix) {
         this.rows = otherMatrix.getRows();
         this.columns = otherMatrix.getColumns();
@@ -29,6 +32,29 @@ public class Matrix {
             }
         }
     }
+
+    //заповнення матриці значеннями
+    public void fillMatrix(int[][] data) {
+        if (data.length != rows || data[0].length != columns) {
+            throw new IllegalArgumentException("Input data array has incorrect dimensions.");
+        }
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                arr[i][j] = data[i][j];
+            }
+        }
+    }
+
+    //заповнення матриці одним і тим самим значенням
+    public void fillMatrix(int value) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                arr[i][j] = value;
+            }
+        }
+    }
+
 
     public int getRows() {
         return rows;

@@ -82,13 +82,10 @@ class MatrixTest {
         myMatrix.setElement(1, 1, 4);
 
         myMatrix.printMatrix();
-
         System.setOut(originalOut);
 
         String consoleOutput = outputStream.toString();
-
         String expectedOutput = "1 2 " + System.lineSeparator() + "3 4 " + System.lineSeparator();
-
         assertEquals(expectedOutput, consoleOutput);
     }
 
@@ -121,10 +118,8 @@ class MatrixTest {
         original.setElement(1, 1, 5);
         original.setElement(1, 2, 6);
 
-        // Створити нову матрицю за допомогою конструктора копії
         Matrix copy = new Matrix(original);
 
-        // Перевірити, чи рівні копія і оригінал
         assertEquals(original.getRows(), copy.getRows());
         assertEquals(original.getColumns(), copy.getColumns());
         for (int i = 0; i < original.getRows(); i++) {
