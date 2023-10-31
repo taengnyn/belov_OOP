@@ -55,6 +55,26 @@ public class Matrix {
         }
     }
 
+    //отримання рядка за індексом
+    public int[] getRowByIndex(int row) {
+        if (row < 0 || row >= rows) {
+            throw new IllegalArgumentException("Invalid row index.");
+        }
+        return arr[row];
+    }
+
+    //отримання стовпчика за індексом
+    public int[] getColumnByIndex(int column) {
+        if (column < 0 || column >= columns) {
+            throw new IllegalArgumentException("Invalid column index.");
+        }
+        int[] result = new int[rows];
+        for (int i = 0; i < rows; i++) {
+            result[i] = arr[i][column];
+        }
+        return result;
+    }
+
 
     public int getRows() {
         return rows;
@@ -64,6 +84,8 @@ public class Matrix {
         return columns;
     }
 
+
+    //також для отримання елементу за індексом
     public int getElement(int row, int column) {
         if (row >= 0 && row < rows && column >= 0 && column < columns) {
             return arr[row][column];

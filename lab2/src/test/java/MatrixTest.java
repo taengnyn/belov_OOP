@@ -48,6 +48,28 @@ class MatrixTest {
     }
 
     @Test
+    public void fillMatrixWithPositiveValue() {
+        Matrix matrix = new Matrix(3, 3);
+        int value = 42;
+
+        matrix.fillMatrix(value);
+
+        // Перевірка, чи всі елементи матриці заповнені значенням 42
+        for (int i = 0; i < matrix.getRows(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                assertEquals(value, matrix.getElement(i, j));
+            }
+        }
+
+        int[][] data = {{1, 2, 3}, {4, 5, 6}};
+
+        // Спроба заповнення матриці з некоректними розмірами введеного масиву
+        assertThrows(IllegalArgumentException.class, () -> {
+            matrix.fillMatrix(data);
+        });
+    }
+
+    @Test
     public void getElementWithInvalidRow() {
         Matrix myMatrix = new Matrix(3, 4);
         try {
@@ -131,6 +153,53 @@ class MatrixTest {
         // Перевірити, чи не змінюється копія при зміні оригіналу
         original.setElement(0, 0, -1);
         assertNotEquals(original.getElement(0, 0), copy.getElement(0, 0));
+    }
+
+    @Test
+    public void getElementWithInvalidIndex() {
+        Matrix matrix = new Matrix(3, 3);
+        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        matrix.fillMatrix(data);
+
+        // Спроба отримати елемент за недійсним індексом
+        assertThrows(IllegalArgumentException.class, () -> {int element = matrix.getElement(5, 2);});
+    }
+
+    @Test
+    public void getRowWithInvalidIndex() {
+        Matrix matrix = new Matrix(3, 3);
+        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        matrix.fillMatrix(data);
+
+        // Спроба отримати рядок за недійсним індексом
+        assertThrows(IllegalArgumentException.class, () -> {int[] row = matrix.getRowByIndex(4);});
+    }
+
+    @Test
+    public void getColumnWithInvalidIndex() {
+        Matrix matrix = new Matrix(3, 3);
+        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        matrix.fillMatrix(data);
+
+        // Спроба отримати стовпець за недійсним індексом
+        assertThrows(IllegalArgumentException.class, () -> {int[] column = matrix.getColumnByIndex(3);});
+    }
+
+    @Test
+    public void testGetColumnByValidIndex() {
+        Matrix matrix = new Matrix(3, 3);
+        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        matrix.fillMatrix(data);
+
+        int[] expectedColumn = {2, 5, 8};
+        int[] actualColumn = matrix.getColumnByIndex(1);
+
+        assertArrayEquals(expectedColumn, actualColumn);
+
+        // Спроба отримати стовпець за некоректним індексом
+        assertThrows(IllegalArgumentException.class, () -> {
+            int[] column = matrix.getColumnByIndex(5);
+        });
     }
 
 
