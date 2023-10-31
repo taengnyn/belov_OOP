@@ -202,5 +202,14 @@ class MatrixTest {
         });
     }
 
+    @Test
+    public void getMatrixDimensions() {
+        Matrix matrix = new Matrix(3, 4);
+        int[] expectedDimensions = {3, 4};
+        int[] actualDimensions = matrix.getMatrixDimensions();
+
+        assertArrayEquals(expectedDimensions, actualDimensions);
+    }
+
 
 }

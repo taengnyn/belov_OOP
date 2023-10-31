@@ -40,8 +40,9 @@ public class Main {
         matrix.fillMatrix(data);
         System.out.println("Filled Matrix:");
         matrix.printMatrix();
+        System.out.println("Dimensions:" + Arrays.toString(matrix.getMatrixDimensions()));
 
-        //отримання рядка, стовпчика, елементу за індексом
+        /*//отримання рядка, стовпчика, елементу за індексом
         int[] row = matrix.getRowByIndex(0);
         int[] column = matrix.getColumnByIndex(1);
         int element = matrix.getElement(1, 2);
@@ -55,7 +56,7 @@ public class Main {
             System.out.println("Element (5, 2): " + element_by_index);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-        }
+        }*/
     }
 }
 

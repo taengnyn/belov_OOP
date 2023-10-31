@@ -55,6 +55,11 @@ public class Matrix {
         }
     }
 
+    //повертає розмірність матриці
+    public int[] getMatrixDimensions() {
+        return new int[]{rows, columns};
+    }
+
     //отримання рядка за індексом
     public int[] getRowByIndex(int row) {
         if (row < 0 || row >= rows) {
