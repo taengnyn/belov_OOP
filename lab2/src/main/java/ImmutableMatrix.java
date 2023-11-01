@@ -23,6 +23,8 @@ public final class ImmutableMatrix extends Matrix{
 
     public Matrix transpose() {return super.transpose();}
 
+    public Matrix createDiagonalMatrix(double[] vector) {return super.createDiagonalMatrix(vector);}
+
     public int getRows() {return super.getRows();}
 
     public int getColumns() {return super.getColumns();}

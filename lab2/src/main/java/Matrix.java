@@ -170,6 +170,16 @@ public class Matrix {
         return resultMatrix;
     }
 
+    public Matrix createDiagonalMatrix(double[] vector) {
+        int size = vector.length;
+        Matrix diagonalMatrix = new Matrix(size, size);
+
+        for (int i = 0; i < size; i++) {
+            diagonalMatrix.setElement(i, i, vector[i]);
+        }
+
+        return diagonalMatrix;
+    }
 
 
     public int setRows(int rows) {

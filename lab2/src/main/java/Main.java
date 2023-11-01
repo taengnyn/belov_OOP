@@ -34,9 +34,10 @@ public class Main {
 
         System.out.println("Matrix 1 * 4:");
         Matrix.scalarMultiply(matrix1, 4).printMatrix();*/
+        double[] vector = {1, 2, 3};
 
         System.out.println("Matrix 1 transpose:");
-        matrix1.transpose().printMatrix();
+        matrix1.createDiagonalMatrix(vector).printMatrix();
     }
 }
 

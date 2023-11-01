@@ -321,4 +321,23 @@ class MatrixTest {
         }
         assertArrayEquals(expectedMatrix, actualData);
     }
+
+    @Test
+    public void testDiagonalMatrix(){
+        Matrix matrix = new Matrix(3, 3);
+        double[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        matrix.fillMatrix(data);
+
+        double[][] expectedMatrix = {{1, 0, 0}, {0, 2, 0}, {0, 0, 3}};
+        double[] vector = {1, 2, 3};
+
+        Matrix result = matrix.createDiagonalMatrix(vector);
+        double[][] actualData = new double[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                actualData[i][j] = result.getElement(i, j);
+            }
+        }
+        assertArrayEquals(expectedMatrix, actualData);
+    }
 }
