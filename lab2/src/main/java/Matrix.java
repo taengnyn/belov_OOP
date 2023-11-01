@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Matrix {
     private int rows;
     private int columns;
@@ -34,6 +32,7 @@ public class Matrix {
             }
         }
     }
+
 
     //заповнення матриці значеннями
     public void fillMatrix(int[][] data) {
@@ -136,6 +135,32 @@ public class Matrix {
         }
         return resultMatrix;
     }
+
+
+    public static Matrix multiply(Matrix matrix1, Matrix matrix2) {
+        int rows1 = matrix1.getRows();
+        int columns1 = matrix1.getColumns();
+        int columns2 = matrix2.getColumns();
+
+        if (columns1 != matrix2.getRows()) {
+            throw new IllegalArgumentException("Number of columns in the first matrix must be equal"+
+                    " \nto the number of rows in the second matrix for multiplication.");
+        }
+
+        Matrix resultMatrix = new Matrix(rows1, columns2);
+        for (int i = 0; i < rows1; i++) {
+            for (int j = 0; j < columns2; j++) {
+                int sum = 0;
+                for (int k = 0; k < columns1; k++) {
+                    sum += matrix1.getElement(i, k) * matrix2.getElement(k, j);
+                }
+                resultMatrix.setElement(i, j, sum);
+            }
+        }
+        return resultMatrix;
+    }
+
+
 
 
 

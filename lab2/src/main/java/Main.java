@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args) {
         //Matrix myMatrix = new Matrix(1, 4);
@@ -19,10 +17,10 @@ public class Main {
         myMatrix.printMatrix();*/
 
         int[][] data1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        int[][] data2 = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
+        int[][] data2 = {{9, 8, 7},{3, 2, 1}};
 
         Matrix matrix1 = new Matrix(3, 3);
-        Matrix matrix2 = new Matrix(3, 3);
+        Matrix matrix2 = new Matrix(2, 3);
         matrix1.fillMatrix(data1);
         matrix2.fillMatrix(data2);
 
@@ -31,11 +29,19 @@ public class Main {
         System.out.println("Matrix 2:");
         matrix2.printMatrix();
 
-        System.out.println("Matrix 1 + Matrix 2:");
+        /*System.out.println("Matrix 1 + Matrix 2:");
         Matrix.addMatrices(matrix1, matrix2).printMatrix();
 
         System.out.println("Matrix 1 * 4:");
-        Matrix.scalarMultiply(matrix1, 4).printMatrix();
+        Matrix.scalarMultiply(matrix1, 4).printMatrix();*/
+
+        System.out.println("Matrix 1 * Matrix 2:");
+        try {
+            Matrix resultMatrix1 = Matrix.multiply(matrix1, matrix2);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Number of columns in the first matrix must be equal"+
+                    " \nto the number of rows in the second matrix for multiplication.");
+        }
     }
 }
 

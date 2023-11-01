@@ -54,7 +54,6 @@ class MatrixTest {
 
         matrix.fillMatrix(value);
 
-        // Перевірка, чи всі елементи матриці заповнені значенням 42
         for (int i = 0; i < matrix.getRows(); i++) {
             for (int j = 0; j < matrix.getColumns(); j++) {
                 assertEquals(value, matrix.getElement(i, j));
@@ -63,7 +62,6 @@ class MatrixTest {
 
         int[][] data = {{1, 2, 3}, {4, 5, 6}};
 
-        // Спроба заповнення матриці з некоректними розмірами введеного масиву
         assertThrows(IllegalArgumentException.class, () -> {
             matrix.fillMatrix(data);
         });
@@ -131,7 +129,6 @@ class MatrixTest {
     }
 
     @Test public void matrixCopyConstructor() {
-        // Створити матрицю 2x3 з деякими значеннями
         Matrix original = new Matrix(2, 3);
         original.setElement(0, 0, 1);
         original.setElement(0, 1, 2);
@@ -150,7 +147,6 @@ class MatrixTest {
             }
         }
 
-        // Перевірити, чи не змінюється копія при зміні оригіналу
         original.setElement(0, 0, -1);
         assertNotEquals(original.getElement(0, 0), copy.getElement(0, 0));
     }
@@ -161,7 +157,6 @@ class MatrixTest {
         int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix.fillMatrix(data);
 
-        // Спроба отримати елемент за недійсним індексом
         assertThrows(IllegalArgumentException.class, () -> {int element = matrix.getElement(5, 2);});
     }
 
@@ -171,7 +166,6 @@ class MatrixTest {
         int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix.fillMatrix(data);
 
-        // Спроба отримати рядок за недійсним індексом
         assertThrows(IllegalArgumentException.class, () -> {int[] row = matrix.getRowByIndex(4);});
     }
 
@@ -181,7 +175,6 @@ class MatrixTest {
         int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix.fillMatrix(data);
 
-        // Спроба отримати стовпець за недійсним індексом
         assertThrows(IllegalArgumentException.class, () -> {int[] column = matrix.getColumnByIndex(3);});
     }
 
@@ -196,7 +189,6 @@ class MatrixTest {
 
         assertArrayEquals(expectedColumn, actualColumn);
 
-        // Спроба отримати стовпець за некоректним індексом
         assertThrows(IllegalArgumentException.class, () -> {
             int[] column = matrix.getColumnByIndex(5);
         });
@@ -221,7 +213,6 @@ class MatrixTest {
         int[][] data2 = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
         matrix2.fillMatrix(data2);
 
-
         int[][] expectedData = {{10, 10, 10}, {10, 10, 10}, {10, 10, 10}};
         Matrix resultMatrix = Matrix.addMatrices(matrix1, matrix2);
 
@@ -243,14 +234,12 @@ class MatrixTest {
         try {
             Matrix resultMatrix1 = Matrix.addMatrices(matrix1, matrix3);
         } catch (IllegalArgumentException e) {
-            // Очікуємо отримання винятку IllegalArgumentException
             assertEquals("Matrix dimensions do not match for addition.", e.getMessage());
         }
     }
 
     @Test
     public void testScalarMultiply() {
-        // Створюємо матрицю 3x3
         Matrix matrix = new Matrix(2, 3);
         int[][] data = {{9, 8, 7}, {3, 2, 1}};
         matrix.fillMatrix(data);
@@ -268,6 +257,43 @@ class MatrixTest {
         }
         int[][] expectedData = {{18, 16, 14}, {6, 4, 2}};
         assertArrayEquals(expectedData, actualData);
+    }
+
+    @Test
+    public void testMatrixMultiplication() {
+        Matrix matrix1 = new Matrix(2, 3);
+        int[][] data1 = {{1, 2, 3}, {4, 5, 6}};
+        matrix1.fillMatrix(data1);
+
+        Matrix matrix2 = new Matrix(3, 2);
+        int[][] data2 = {{7, 8}, {9, 10}, {11, 12}};
+        matrix2.fillMatrix(data2);
+
+        Matrix resultMatrix = Matrix.multiply(matrix1, matrix2);
+        int[] actualDimensions = resultMatrix.getMatrixDimensions();
+        assertEquals(2, actualDimensions[0]);
+        assertEquals(2, actualDimensions[1]);
+
+        int[][] expectedData = {{58, 64}, {139, 154}};
+        int[][] actualData = new int[2][2];
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                actualData[i][j] = resultMatrix.getElement(i, j);
+            }
+        }
+        assertArrayEquals(expectedData, actualData);
+
+
+        Matrix matrix3 = new Matrix(2, 2);
+        int[][] data3 = {{7, 8}, {9, 10}};
+        matrix3.fillMatrix(data3);
+
+        try {
+            Matrix resultMatrix1 = Matrix.multiply(matrix1, matrix3);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Number of columns in the first matrix must be equal"+
+                    " \nto the number of rows in the second matrix for multiplication.", e.getMessage());
+        }
     }
 
 
