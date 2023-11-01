@@ -340,4 +340,29 @@ class MatrixTest {
         }
         assertArrayEquals(expectedMatrix, actualData);
     }
+
+    @Test
+    public void testCreateIdentityMatrix() {
+        Matrix identityMatrix = Matrix.createIdentityMatrix(2);
+
+        double[][] expectedData = {
+                {1, 0},
+                {0, 1},
+        };
+
+        double[][] actualData = new double[2][2];
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                actualData[i][j] = identityMatrix.getElement(i, j);
+            }
+        }
+        assertArrayEquals(expectedData, actualData);
+    }
+
+    @Test
+    public void testCreateIdentityMatrixWithInvalidSize() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Matrix identityMatrix = Matrix.createIdentityMatrix(-1);
+        });
+    }
 }

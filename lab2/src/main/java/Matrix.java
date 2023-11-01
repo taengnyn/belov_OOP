@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Matrix {
     private int rows;
     private int columns;
@@ -180,6 +182,21 @@ public class Matrix {
 
         return diagonalMatrix;
     }
+
+    public static Matrix createIdentityMatrix(int size) {
+        if(size  < 0) {
+            throw new IllegalArgumentException("Matrix size cannot be negative.");
+        }
+
+        Matrix matrix = new Matrix(size, size);
+        for (int i = 0; i < size; i++) {
+            matrix.setElement(i, i, 1);
+        }
+
+        return matrix;
+    }
+
+
 
 
     public int setRows(int rows) {
