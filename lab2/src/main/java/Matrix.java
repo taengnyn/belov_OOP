@@ -196,6 +196,24 @@ public class Matrix {
         return matrix;
     }
 
+    public static double[][] getRowMatrix(int n) {
+            Random random = new Random();
+            double[][] matrix = new double[1][n];
+            for (int i = 0; i < n; i++) {
+                matrix[0][i] = random.nextInt(100);
+            }
+            return matrix;
+        }
+
+    public static double[][] getColumnMatrix(int m) {
+            Random random = new Random();
+            double[][] matrix = new double[m][1];
+            for (int i = 0; i < m; i++) {
+                matrix[i][0] = random.nextInt(100);
+            }
+            return matrix;
+        }
+
 
 
 

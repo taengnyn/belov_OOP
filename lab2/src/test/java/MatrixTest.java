@@ -365,4 +365,24 @@ class MatrixTest {
             Matrix identityMatrix = Matrix.createIdentityMatrix(-1);
         });
     }
+
+    @Test
+    public void testRowMatrix() {
+        double[][] rowMatrix = Matrix.getRowMatrix(5);
+        assertEquals(1, rowMatrix.length);
+        assertEquals(5, rowMatrix[0].length);
+        for (int i = 0; i < rowMatrix[0].length; i++) {
+            assertTrue(rowMatrix[0][i] >= 0 && rowMatrix[0][i] <= 99);
+        }
+    }
+
+    @Test
+    public void testColumnMatrix() {
+        double[][] columnMatrix = Matrix.getColumnMatrix(3);
+        assertEquals(3, columnMatrix.length);
+        assertEquals(1, columnMatrix[0].length);
+        for (int i = 0; i < columnMatrix.length; i++) {
+            assertTrue(columnMatrix[i][0] >= 0 && columnMatrix[i][0] <= 99);
+        }
+    }
 }
