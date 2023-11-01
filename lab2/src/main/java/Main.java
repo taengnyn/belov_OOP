@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        Matrix myMatrix = new Matrix(3, 4);
+        //Matrix myMatrix = new Matrix(1, 4);
         /*myMatrix.setElement(0, 0, 5);
         myMatrix.setElement(1, 2, 8);
         myMatrix.setElement(2, 3, 3);
@@ -32,31 +32,20 @@ public class Main {
         copyMatrix.printMatrix();*/
 
         // Створення матриці 3x3
-        Matrix matrix = new Matrix(3, 3);
+        Matrix matrix1 = new Matrix(1, 1);
+        Matrix matrix2 = new Matrix(1, 1);
         /*System.out.println("Empty Matrix:");
         matrix.printMatrix();*/
 
-        int[][] data = {{1, 2, 3}, {4, -10, 6}, {7, 8, 9}};
-        matrix.fillMatrix(data);
-        System.out.println("Filled Matrix:");
-        matrix.printMatrix();
-        System.out.println("Dimensions:" + Arrays.toString(matrix.getMatrixDimensions()));
+        //matrix1.fillMatrix(1);
+        System.out.println("Filled Matrix 1:");
+        matrix1.printMatrix();
+        System.out.println("Dimensions Matrix 1:" + Arrays.toString(matrix1.getMatrixDimensions()));
 
-        /*//отримання рядка, стовпчика, елементу за індексом
-        int[] row = matrix.getRowByIndex(0);
-        int[] column = matrix.getColumnByIndex(1);
-        int element = matrix.getElement(1, 2);
-        System.out.println("Row: " + Arrays.toString(row));
-        System.out.println("Column: " + Arrays.toString(column));
-        System.out.println("Element: " + element);
-
-        // Спроба отримати елемент, рядок і стовпець за індексом, якого немає в матриці
-        try {
-            int element_by_index = matrix.getElement(5, 2);
-            System.out.println("Element (5, 2): " + element_by_index);
-        } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
-        }*/
+        //matrix1.fillMatrix(1);
+        System.out.println("Filled Matrix 2:");
+        matrix1.printMatrix();
+        System.out.println("Dimensions Matrix 2:" + Arrays.toString(matrix1.getMatrixDimensions()));
     }
 }
 

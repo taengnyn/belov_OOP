@@ -1,7 +1,9 @@
+import java.util.Arrays;
+
 public class Matrix {
-    private final int rows;
-    private final int columns;
-    private final int[][] arr;
+    private int rows;
+    private int columns;
+    private int[][] arr;
 
 
     //пуста матриця розміром 0*0
@@ -78,6 +80,41 @@ public class Matrix {
             result[i] = arr[i][column];
         }
         return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // Перевіряємо, чи є o екземпляром Matrix
+        if (!(o instanceof Matrix)) return false;
+        // Приводимо o до типу Matrix
+        Matrix otherMatrix = (Matrix) o;
+
+        // Перевіряємо, чи мають матриці однаковий розмір
+        if (rows != otherMatrix.rows || columns != otherMatrix.columns) return false;
+        // Порівнюємо кожен рядок матриць за допомогою методу Arrays.equals()
+        for (int i = 0; i < rows; i++) {
+            if (!Arrays.equals(arr[i], otherMatrix.arr[i])) return false;
+        }
+        // Якщо всі рядки однакові, повертаємо true
+        return true;
+    }
+
+
+    @Override
+    public int hashCode() {
+        int result = 31 * rows + columns;
+        for (int i = 0; i < rows; i++) {
+            result = 31 * result + Arrays.hashCode(arr[i]);
+        }
+        return result;
+    }
+
+    public int setRows(int rows) {
+        return this.rows = rows;
+    }
+
+    public int setColumns(int columns) {
+        return this.columns = columns;
     }
 
 

@@ -210,6 +210,4 @@ class MatrixTest {
 
         assertArrayEquals(expectedDimensions, actualDimensions);
     }
-
-
 }
