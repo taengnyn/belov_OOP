@@ -50,7 +50,7 @@ class MatrixTest {
     @Test
     public void fillMatrixWithPositiveValue() {
         Matrix matrix = new Matrix(3, 3);
-        int value = 42;
+        double value = 42.1;
 
         matrix.fillMatrix(value);
 
@@ -60,7 +60,7 @@ class MatrixTest {
             }
         }
 
-        int[][] data = {{1, 2, 3}, {4, 5, 6}};
+        double[][] data = {{1, 2, 3}, {4, 5, 6}};
 
         assertThrows(IllegalArgumentException.class, () -> {
             matrix.fillMatrix(data);
@@ -71,7 +71,7 @@ class MatrixTest {
     public void getElementWithInvalidRow() {
         Matrix myMatrix = new Matrix(3, 4);
         try {
-            int value = myMatrix.getElement(5, 2);
+            double value = myMatrix.getElement(5, 2);
             fail("Expected IllegalArgumentException, but no exception was thrown.");
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
@@ -82,7 +82,7 @@ class MatrixTest {
     public void getElementWithInvalidColumn() {
         Matrix myMatrix = new Matrix(3, 4);
         try {
-            int value = myMatrix.getElement(1, 5);
+            double value = myMatrix.getElement(1, 5);
             fail("Expected IllegalArgumentException, but no exception was thrown.");
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
@@ -105,7 +105,7 @@ class MatrixTest {
         System.setOut(originalOut);
 
         String consoleOutput = outputStream.toString();
-        String expectedOutput = "1 2 " + System.lineSeparator() + "3 4 " + System.lineSeparator();
+        String expectedOutput = "1.0 2.0 " + System.lineSeparator() + "3.0 4.0 " + System.lineSeparator();
         assertEquals(expectedOutput, consoleOutput);
     }
 
@@ -154,43 +154,43 @@ class MatrixTest {
     @Test
     public void getElementWithInvalidIndex() {
         Matrix matrix = new Matrix(3, 3);
-        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        double[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix.fillMatrix(data);
 
-        assertThrows(IllegalArgumentException.class, () -> {int element = matrix.getElement(5, 2);});
+        assertThrows(IllegalArgumentException.class, () -> {double element = matrix.getElement(5, 2);});
     }
 
     @Test
     public void getRowWithInvalidIndex() {
         Matrix matrix = new Matrix(3, 3);
-        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        double[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix.fillMatrix(data);
 
-        assertThrows(IllegalArgumentException.class, () -> {int[] row = matrix.getRowByIndex(4);});
+        assertThrows(IllegalArgumentException.class, () -> {double[] row = matrix.getRowByIndex(4);});
     }
 
     @Test
     public void getColumnWithInvalidIndex() {
         Matrix matrix = new Matrix(3, 3);
-        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        double[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix.fillMatrix(data);
 
-        assertThrows(IllegalArgumentException.class, () -> {int[] column = matrix.getColumnByIndex(3);});
+        assertThrows(IllegalArgumentException.class, () -> {double[] column = matrix.getColumnByIndex(3);});
     }
 
     @Test
     public void testGetColumnByValidIndex() {
         Matrix matrix = new Matrix(3, 3);
-        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        double[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix.fillMatrix(data);
 
-        int[] expectedColumn = {2, 5, 8};
-        int[] actualColumn = matrix.getColumnByIndex(1);
+        double[] expectedColumn = {2, 5, 8};
+        double[] actualColumn = matrix.getColumnByIndex(1);
 
         assertArrayEquals(expectedColumn, actualColumn);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            int[] column = matrix.getColumnByIndex(5);
+            double[] column = matrix.getColumnByIndex(5);
         });
     }
 
@@ -206,21 +206,21 @@ class MatrixTest {
     @Test
     public void testAddMatrices() {
         Matrix matrix1 = new Matrix(3, 3);
-        int[][] data1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        double[][] data1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix1.fillMatrix(data1);
 
         Matrix matrix2 = new Matrix(3, 3);
-        int[][] data2 = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
+        double[][] data2 = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
         matrix2.fillMatrix(data2);
 
-        int[][] expectedData = {{10, 10, 10}, {10, 10, 10}, {10, 10, 10}};
+        double[][] expectedData = {{10, 10, 10}, {10, 10, 10}, {10, 10, 10}};
         Matrix resultMatrix = Matrix.addMatrices(matrix1, matrix2);
 
         int[] actualDimensions = resultMatrix.getMatrixDimensions();
         assertEquals(3, actualDimensions[0]);
         assertEquals(3, actualDimensions[1]);
 
-        int[][] actualData = new int[3][3];
+        double[][] actualData = new double[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 actualData[i][j] = resultMatrix.getElement(i, j);
@@ -229,7 +229,7 @@ class MatrixTest {
         assertArrayEquals(expectedData, actualData);
 
         Matrix matrix3 = new Matrix(3, 2);
-        int[][] data3 = {{9, 8}, {6, 5}, {3, 2}};
+        double[][] data3 = {{9, 8}, {6, 5}, {3, 2}};
         matrix3.fillMatrix(data3);
         try {
             Matrix resultMatrix1 = Matrix.addMatrices(matrix1, matrix3);
@@ -241,7 +241,7 @@ class MatrixTest {
     @Test
     public void testScalarMultiply() {
         Matrix matrix = new Matrix(2, 3);
-        int[][] data = {{9, 8, 7}, {3, 2, 1}};
+        double[][] data = {{9, 8, 7}, {3, 2, 1}};
         matrix.fillMatrix(data);
 
         Matrix resultMatrix = Matrix.scalarMultiply(matrix, 2);
@@ -249,24 +249,24 @@ class MatrixTest {
         assertEquals(2, actualDimensions[0]);
         assertEquals(3, actualDimensions[1]);
 
-        int[][] actualData = new int[2][3];
+        double[][] actualData = new double[2][3];
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
                 actualData[i][j] = resultMatrix.getElement(i, j);
             }
         }
-        int[][] expectedData = {{18, 16, 14}, {6, 4, 2}};
+        double[][] expectedData = {{18, 16, 14}, {6, 4, 2}};
         assertArrayEquals(expectedData, actualData);
     }
 
     @Test
     public void testMatrixMultiplication() {
         Matrix matrix1 = new Matrix(2, 3);
-        int[][] data1 = {{1, 2, 3}, {4, 5, 6}};
+        double[][] data1 = {{1, 2, 3}, {4, 5, 6}};
         matrix1.fillMatrix(data1);
 
         Matrix matrix2 = new Matrix(3, 2);
-        int[][] data2 = {{7, 8}, {9, 10}, {11, 12}};
+        double[][] data2 = {{7, 8}, {9, 10}, {11, 12}};
         matrix2.fillMatrix(data2);
 
         Matrix resultMatrix = Matrix.multiply(matrix1, matrix2);
@@ -274,8 +274,8 @@ class MatrixTest {
         assertEquals(2, actualDimensions[0]);
         assertEquals(2, actualDimensions[1]);
 
-        int[][] expectedData = {{58, 64}, {139, 154}};
-        int[][] actualData = new int[2][2];
+        double[][] expectedData = {{58, 64}, {139, 154}};
+        double[][] actualData = new double[2][2];
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 actualData[i][j] = resultMatrix.getElement(i, j);
@@ -285,7 +285,7 @@ class MatrixTest {
 
 
         Matrix matrix3 = new Matrix(2, 2);
-        int[][] data3 = {{7, 8}, {9, 10}};
+        double[][] data3 = {{7, 8}, {9, 10}};
         matrix3.fillMatrix(data3);
 
         try {

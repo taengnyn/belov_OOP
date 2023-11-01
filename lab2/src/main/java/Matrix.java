@@ -1,7 +1,7 @@
 public class Matrix {
     private int rows;
     private int columns;
-    private int[][] arr;
+    private double[][] arr;
 
 
     //пуста матриця розміром 0*0
@@ -13,7 +13,7 @@ public class Matrix {
     public Matrix(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
-        this.arr = new int[rows][columns];
+        this.arr = new double[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 this.arr[i][j] = 0;
@@ -25,7 +25,7 @@ public class Matrix {
     public Matrix(Matrix otherMatrix) {
         this.rows = otherMatrix.getRows();
         this.columns = otherMatrix.getColumns();
-        this.arr = new int[rows][columns];
+        this.arr = new double[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 this.arr[i][j] = otherMatrix.getElement(i, j);
@@ -35,7 +35,7 @@ public class Matrix {
 
 
     //заповнення матриці значеннями
-    public void fillMatrix(int[][] data) {
+    public void fillMatrix(double[][] data) {
         if (data.length != rows || data[0].length != columns) {
             throw new IllegalArgumentException("Input data array has incorrect dimensions.");
         }
@@ -48,7 +48,7 @@ public class Matrix {
     }
 
     //заповнення матриці одним і тим самим значенням
-    public void fillMatrix(int value) {
+    public void fillMatrix(double value) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 arr[i][j] = value;
@@ -62,7 +62,7 @@ public class Matrix {
     }
 
     //отримання рядка за індексом
-    public int[] getRowByIndex(int row) {
+    public double[] getRowByIndex(int row) {
         if (row < 0 || row >= rows) {
             throw new IllegalArgumentException("Invalid row index.");
         }
@@ -70,11 +70,11 @@ public class Matrix {
     }
 
     //отримання стовпчика за індексом
-    public int[] getColumnByIndex(int column) {
+    public double[] getColumnByIndex(int column) {
         if (column < 0 || column >= columns) {
             throw new IllegalArgumentException("Invalid column index.");
         }
-        int[] result = new int[rows];
+        double[] result = new double[rows];
         for (int i = 0; i < rows; i++) {
             result[i] = arr[i][column];
         }
@@ -119,7 +119,7 @@ public class Matrix {
         Matrix resultMatrix = new Matrix(rows1, columns1);
         for (int i = 0; i < rows1; i++) {
             for (int j = 0; j < columns1; j++) {
-                int sum = matrix1.getElement(i, j) + matrix2.getElement(i, j);
+                double sum = matrix1.getElement(i, j) + matrix2.getElement(i, j);
                 resultMatrix.setElement(i, j, sum);
             }
         }
@@ -162,8 +162,6 @@ public class Matrix {
 
 
 
-
-
     public int setRows(int rows) {
         return this.rows = rows;
     }
@@ -183,7 +181,7 @@ public class Matrix {
 
 
     //також для отримання елементу за індексом
-    public int getElement(int row, int column) {
+    public double getElement(int row, int column) {
         if (row >= 0 && row < rows && column >= 0 && column < columns) {
             return arr[row][column];
         } else {
@@ -191,7 +189,7 @@ public class Matrix {
         }
     }
 
-    public void setElement(int row, int column, int value) {
+    public void setElement(int row, int column, double value) {
         if (row >= 0 && row < rows && column >= 0 && column < columns) {
             arr[row][column] = value;
         } else {

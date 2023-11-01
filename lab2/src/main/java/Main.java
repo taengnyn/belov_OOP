@@ -16,11 +16,11 @@ public class Main {
         System.out.println("Matrix:");
         myMatrix.printMatrix();*/
 
-        int[][] data1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        int[][] data2 = {{9, 8, 7},{3, 2, 1}};
+        double[][] data1 = {{1, 2, 3}, {4, 5, 8}, {7, 8, 9}};
+        double[][] data2 = {{9, 8, 7}, {6, 5, 4}, {3, -1, 1}};
 
         Matrix matrix1 = new Matrix(3, 3);
-        Matrix matrix2 = new Matrix(2, 3);
+        Matrix matrix2 = new Matrix(3, 3);
         matrix1.fillMatrix(data1);
         matrix2.fillMatrix(data2);
 
@@ -36,12 +36,7 @@ public class Main {
         Matrix.scalarMultiply(matrix1, 4).printMatrix();*/
 
         System.out.println("Matrix 1 * Matrix 2:");
-        try {
-            Matrix resultMatrix1 = Matrix.multiply(matrix1, matrix2);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Number of columns in the first matrix must be equal"+
-                    " \nto the number of rows in the second matrix for multiplication.");
-        }
+        Matrix.multiply(matrix1, matrix2).printMatrix();
     }
 }
 
