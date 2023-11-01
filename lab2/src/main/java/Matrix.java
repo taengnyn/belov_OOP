@@ -150,11 +150,21 @@ public class Matrix {
         Matrix resultMatrix = new Matrix(rows1, columns2);
         for (int i = 0; i < rows1; i++) {
             for (int j = 0; j < columns2; j++) {
-                int sum = 0;
+                double sum = 0;
                 for (int k = 0; k < columns1; k++) {
                     sum += matrix1.getElement(i, k) * matrix2.getElement(k, j);
                 }
                 resultMatrix.setElement(i, j, sum);
+            }
+        }
+        return resultMatrix;
+    }
+
+    public Matrix transpose() {
+        Matrix resultMatrix = new Matrix(columns, rows);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                resultMatrix.setElement(j, i, getElement(i, j));
             }
         }
         return resultMatrix;

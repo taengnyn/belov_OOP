@@ -35,8 +35,8 @@ public class Main {
         System.out.println("Matrix 1 * 4:");
         Matrix.scalarMultiply(matrix1, 4).printMatrix();*/
 
-        System.out.println("Matrix 1 * Matrix 2:");
-        Matrix.multiply(matrix1, matrix2).printMatrix();
+        System.out.println("Matrix 1 transpose:");
+        matrix1.transpose().printMatrix();
     }
 }
 
