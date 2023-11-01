@@ -210,4 +210,65 @@ class MatrixTest {
 
         assertArrayEquals(expectedDimensions, actualDimensions);
     }
+
+    @Test
+    public void testAddMatrices() {
+        Matrix matrix1 = new Matrix(3, 3);
+        int[][] data1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        matrix1.fillMatrix(data1);
+
+        Matrix matrix2 = new Matrix(3, 3);
+        int[][] data2 = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
+        matrix2.fillMatrix(data2);
+
+
+        int[][] expectedData = {{10, 10, 10}, {10, 10, 10}, {10, 10, 10}};
+        Matrix resultMatrix = Matrix.addMatrices(matrix1, matrix2);
+
+        int[] actualDimensions = resultMatrix.getMatrixDimensions();
+        assertEquals(3, actualDimensions[0]);
+        assertEquals(3, actualDimensions[1]);
+
+        int[][] actualData = new int[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                actualData[i][j] = resultMatrix.getElement(i, j);
+            }
+        }
+        assertArrayEquals(expectedData, actualData);
+
+        Matrix matrix3 = new Matrix(3, 2);
+        int[][] data3 = {{9, 8}, {6, 5}, {3, 2}};
+        matrix3.fillMatrix(data3);
+        try {
+            Matrix resultMatrix1 = Matrix.addMatrices(matrix1, matrix3);
+        } catch (IllegalArgumentException e) {
+            // Очікуємо отримання винятку IllegalArgumentException
+            assertEquals("Matrix dimensions do not match for addition.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testScalarMultiply() {
+        // Створюємо матрицю 3x3
+        Matrix matrix = new Matrix(2, 3);
+        int[][] data = {{9, 8, 7}, {3, 2, 1}};
+        matrix.fillMatrix(data);
+
+        Matrix resultMatrix = Matrix.scalarMultiply(matrix, 2);
+        int[] actualDimensions = resultMatrix.getMatrixDimensions();
+        assertEquals(2, actualDimensions[0]);
+        assertEquals(3, actualDimensions[1]);
+
+        int[][] actualData = new int[2][3];
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                actualData[i][j] = resultMatrix.getElement(i, j);
+            }
+        }
+        int[][] expectedData = {{18, 16, 14}, {6, 4, 2}};
+        assertArrayEquals(expectedData, actualData);
+    }
+
+
 }

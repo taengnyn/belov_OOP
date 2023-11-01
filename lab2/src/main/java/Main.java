@@ -16,36 +16,26 @@ public class Main {
         System.out.println("Number of columns: " + numColumns);
         System.out.println("----Matrix----");
         System.out.println("Matrix:");
-        myMatrix.printMatrix();
+        myMatrix.printMatrix();*/
 
-        Matrix emptyMatrix = new Matrix();
-        System.out.println("Empty Matrix:");
-        emptyMatrix.printMatrix();
+        int[][] data1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int[][] data2 = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
 
-        Matrix matrix3x3 = new Matrix(3, 3);
-        System.out.println("3x3 Matrix:");
-        matrix3x3.printMatrix();
-        Matrix copyMatrix = new Matrix(matrix3x3);
+        Matrix matrix1 = new Matrix(3, 3);
+        Matrix matrix2 = new Matrix(3, 3);
+        matrix1.fillMatrix(data1);
+        matrix2.fillMatrix(data2);
 
-        // Виведення копії матриці 3x3
-        System.out.println("Copy of 3x3 Matrix:");
-        copyMatrix.printMatrix();*/
-
-        // Створення матриці 3x3
-        Matrix matrix1 = new Matrix(1, 1);
-        Matrix matrix2 = new Matrix(1, 1);
-        /*System.out.println("Empty Matrix:");
-        matrix.printMatrix();*/
-
-        //matrix1.fillMatrix(1);
-        System.out.println("Filled Matrix 1:");
+        System.out.println("Matrix 1:");
         matrix1.printMatrix();
-        System.out.println("Dimensions Matrix 1:" + Arrays.toString(matrix1.getMatrixDimensions()));
+        System.out.println("Matrix 2:");
+        matrix2.printMatrix();
 
-        //matrix1.fillMatrix(1);
-        System.out.println("Filled Matrix 2:");
-        matrix1.printMatrix();
-        System.out.println("Dimensions Matrix 2:" + Arrays.toString(matrix1.getMatrixDimensions()));
+        System.out.println("Matrix 1 + Matrix 2:");
+        Matrix.addMatrices(matrix1, matrix2).printMatrix();
+
+        System.out.println("Matrix 1 * 4:");
+        Matrix.scalarMultiply(matrix1, 4).printMatrix();
     }
 }
 

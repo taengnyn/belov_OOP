@@ -82,16 +82,13 @@ public class Matrix {
         return result;
     }
 
-    @Override
+    /*@Override
     public boolean equals(Object o) {
-        // Перевіряємо, чи є o екземпляром Matrix
+
         if (!(o instanceof Matrix)) return false;
-        // Приводимо o до типу Matrix
         Matrix otherMatrix = (Matrix) o;
 
-        // Перевіряємо, чи мають матриці однаковий розмір
         if (rows != otherMatrix.rows || columns != otherMatrix.columns) return false;
-        // Порівнюємо кожен рядок матриць за допомогою методу Arrays.equals()
         for (int i = 0; i < rows; i++) {
             if (!Arrays.equals(arr[i], otherMatrix.arr[i])) return false;
         }
@@ -107,7 +104,40 @@ public class Matrix {
             result = 31 * result + Arrays.hashCode(arr[i]);
         }
         return result;
+    }*/
+
+    public static Matrix addMatrices(Matrix matrix1, Matrix matrix2) {
+        int rows1 = matrix1.getRows();
+        int columns1 = matrix1.getColumns();
+
+        int rows2 = matrix2.getRows();
+        int columns2 = matrix2.getColumns();
+
+        if (rows1 != rows2 || columns1 != columns2) {
+            throw new IllegalArgumentException("Matrix dimensions do not match for addition.");
+        }
+
+        Matrix resultMatrix = new Matrix(rows1, columns1);
+        for (int i = 0; i < rows1; i++) {
+            for (int j = 0; j < columns1; j++) {
+                int sum = matrix1.getElement(i, j) + matrix2.getElement(i, j);
+                resultMatrix.setElement(i, j, sum);
+            }
+        }
+        return resultMatrix;
     }
+
+    public static Matrix scalarMultiply(Matrix matrix, int scalar) {
+        Matrix resultMatrix = new Matrix(matrix.getRows(), matrix.getColumns());
+        for (int i = 0; i < matrix.getRows(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                resultMatrix.setElement(i, j, matrix.getElement(i, j) * scalar);
+            }
+        }
+        return resultMatrix;
+    }
+
+
 
     public int setRows(int rows) {
         return this.rows = rows;
