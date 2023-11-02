@@ -21,6 +21,7 @@ public final class ImmutableMatrix extends Matrix{
 
     public double[] getColumnByIndex(int index) {return super.getColumnByIndex(index);}
 
+    
     @Override
     public boolean equals(Object o) {return super.equals(o);}
 

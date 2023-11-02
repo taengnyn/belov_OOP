@@ -4,7 +4,7 @@ import java.util.Random;
 public class Matrix {
     private int rows;
     private int columns;
-    private double[][] arr;
+    private final double[][] arr;
 
 
     //пуста матриця розміром 0*0
@@ -84,19 +84,30 @@ public class Matrix {
         return result;
     }
 
-    /*@Override
-    public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {return false;}
+        if (this == obj) {return true;}
 
-        if (!(o instanceof Matrix)) return false;
-        Matrix otherMatrix = (Matrix) o;
+        if (!(obj instanceof Matrix)) {return false;}
 
-        if (rows != otherMatrix.rows || columns != otherMatrix.columns) return false;
+        Matrix otherMatrix = (Matrix) obj;
+        int rows = arr.length;
+        int cols = arr[0].length;
+        int otherRows = otherMatrix.arr.length;
+        int otherCols = otherMatrix.arr[0].length;
+
+        if (rows != otherRows || cols != otherCols) {return false;}
+
         for (int i = 0; i < rows; i++) {
-            if (!Arrays.equals(arr[i], otherMatrix.arr[i])) return false;
+            for (int j = 0; j < cols; j++) {
+                if (Math.abs(arr[i][j] - otherMatrix.arr[i][j]) > 1e-9) {
+                    return false;
+                }
+            }
         }
-        // Якщо всі рядки однакові, повертаємо true
         return true;
-    }*/
+    }
 
 
     @Override

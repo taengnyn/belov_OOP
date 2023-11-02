@@ -6,6 +6,8 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MatrixTest {
+
+
     @Test
     public void matrixInitialization() {
         Matrix myMatrix = new Matrix(3, 4);
@@ -63,16 +65,14 @@ class MatrixTest {
 
         double[][] data = {{1, 2, 3}, {4, 5, 6}};
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            matrix.fillMatrix(data);
-        });
+        assertThrows(IllegalArgumentException.class, () -> matrix.fillMatrix(data));
     }
 
     @Test
     public void getElementWithInvalidRow() {
         Matrix myMatrix = new Matrix(3, 4);
         try {
-            double value = myMatrix.getElement(5, 2);
+            myMatrix.getElement(5, 2);
             fail("Expected IllegalArgumentException, but no exception was thrown.");
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
@@ -83,7 +83,7 @@ class MatrixTest {
     public void getElementWithInvalidColumn() {
         Matrix myMatrix = new Matrix(3, 4);
         try {
-            double value = myMatrix.getElement(1, 5);
+            myMatrix.getElement(1, 5);
             fail("Expected IllegalArgumentException, but no exception was thrown.");
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
@@ -159,9 +159,7 @@ class MatrixTest {
         double[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix.fillMatrix(data);
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            double element = matrix.getElement(5, 2);
-        });
+        assertThrows(IllegalArgumentException.class, () -> matrix.getElement(5, 2));
     }
 
     @Test
@@ -170,9 +168,7 @@ class MatrixTest {
         double[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix.fillMatrix(data);
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            double[] row = matrix.getRowByIndex(4);
-        });
+        assertThrows(IllegalArgumentException.class, () -> matrix.getRowByIndex(4));
     }
 
     @Test
@@ -181,9 +177,7 @@ class MatrixTest {
         double[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix.fillMatrix(data);
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            double[] column = matrix.getColumnByIndex(3);
-        });
+        assertThrows(IllegalArgumentException.class, () -> matrix.getColumnByIndex(3));
     }
 
     @Test
@@ -197,9 +191,7 @@ class MatrixTest {
 
         assertArrayEquals(expectedColumn, actualColumn);
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            double[] column = matrix.getColumnByIndex(5);
-        });
+        assertThrows(IllegalArgumentException.class, () -> matrix.getColumnByIndex(5));
     }
 
     @Test
@@ -240,7 +232,7 @@ class MatrixTest {
         double[][] data3 = {{9, 8}, {6, 5}, {3, 2}};
         matrix3.fillMatrix(data3);
         try {
-            Matrix resultMatrix1 = Matrix.addMatrices(matrix1, matrix3);
+            Matrix.addMatrices(matrix1, matrix3);
         } catch (IllegalArgumentException e) {
             assertEquals("Matrix dimensions do not match for addition.", e.getMessage());
         }
@@ -297,7 +289,7 @@ class MatrixTest {
         matrix3.fillMatrix(data3);
 
         try {
-            Matrix resultMatrix1 = Matrix.multiply(matrix1, matrix3);
+            Matrix.multiply(matrix1, matrix3);
         } catch (IllegalArgumentException e) {
             assertEquals("Number of columns in the first matrix must be equal" +
                     " \nto the number of rows in the second matrix for multiplication.", e.getMessage());
@@ -361,9 +353,7 @@ class MatrixTest {
 
     @Test
     public void testCreateIdentityMatrixWithInvalidSize() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Matrix identityMatrix = Matrix.createIdentityMatrix(-1);
-        });
+        assertThrows(IllegalArgumentException.class, () -> Matrix.createIdentityMatrix(-1));
     }
 
     @Test
@@ -381,8 +371,8 @@ class MatrixTest {
         double[][] columnMatrix = Matrix.getColumnMatrix(3);
         assertEquals(3, columnMatrix.length);
         assertEquals(1, columnMatrix[0].length);
-        for (int i = 0; i < columnMatrix.length; i++) {
-            assertTrue(columnMatrix[i][0] >= 0 && columnMatrix[i][0] <= 99);
+        for (double[] matrix : columnMatrix) {
+            assertTrue(matrix[0] >= 0 && matrix[0] <= 99);
         }
     }
 
@@ -420,5 +410,40 @@ class MatrixTest {
             }
         }
         assertArrayEquals(expectedMatrix, actualData);
+    }
+
+    @Test
+    public void testEquals() {
+        Matrix matrix1 = new Matrix(3, 3);
+        double[][] data1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        matrix1.fillMatrix(data1);
+
+        Matrix matrix2 = new Matrix(3, 3);
+        double[][] data2 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        matrix2.fillMatrix(data2);
+
+        Matrix matrix3 = new Matrix(3, 3);
+        double[][] data3 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 10}};
+        matrix3.fillMatrix(data3);
+
+        assertTrue(matrix1.equals(matrix2));
+        assertFalse(matrix1.equals(matrix3));
+    }
+
+    @Test
+    public void testHashCode() {
+        Matrix matrix1 = new Matrix(3, 3);
+        double[][] data1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        matrix1.fillMatrix(data1);
+
+        Matrix matrix2 = new Matrix(3, 3);
+        double[][] data2 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        matrix2.fillMatrix(data2);
+
+        Matrix matrix3 = new Matrix(3, 3);
+        double[][] data3 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 10}};
+        matrix3.fillMatrix(data3);
+        assertEquals(matrix1.hashCode(), matrix2.hashCode());
+        assertNotEquals(matrix1.hashCode(), matrix3.hashCode());
     }
 }
