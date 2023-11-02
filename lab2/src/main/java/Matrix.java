@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class Matrix {
@@ -95,7 +96,7 @@ public class Matrix {
         }
         // Якщо всі рядки однакові, повертаємо true
         return true;
-    }
+    }*/
 
 
     @Override
@@ -105,7 +106,7 @@ public class Matrix {
             result = 31 * result + Arrays.hashCode(arr[i]);
         }
         return result;
-    }*/
+    }
 
     public static Matrix addMatrices(Matrix matrix1, Matrix matrix2) {
         int rows1 = matrix1.getRows();
@@ -215,6 +216,38 @@ public class Matrix {
         }
 
 
+    public Matrix lowerTriangular() {
+        int rows = arr.length;
+        int cols = arr[0].length;
+        Matrix result = new Matrix(rows, cols);
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (i >= j) {
+                    result.arr[i][j] = arr[i][j];
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public Matrix upperTriangular() {
+        int rows = arr.length;
+        int cols = arr[0].length;
+        Matrix result = new Matrix(rows, cols);
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (i <= j) {
+                    // Копіюємо елемент в результат
+                    result.arr[i][j] = arr[i][j];
+                }
+            }
+        }
+        // Повертаємо результат
+        return result;
+    }
 
 
     public int setRows(int rows) {

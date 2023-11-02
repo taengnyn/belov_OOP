@@ -21,9 +21,21 @@ public final class ImmutableMatrix extends Matrix{
 
     public double[] getColumnByIndex(int index) {return super.getColumnByIndex(index);}
 
+    @Override
+    public boolean equals(Object o) {return super.equals(o);}
+
+    @Override
+    public int hashCode() {return super.hashCode();}
+
     public Matrix transpose() {return super.transpose();}
 
     public Matrix createDiagonalMatrix(double[] vector) {return super.createDiagonalMatrix(vector);}
+
+    public Matrix lowerTriangular() {return super.lowerTriangular();}
+
+    public Matrix upperTriangular() {return super.upperTriangular();}
+
+
 
     public int getRows() {return super.getRows();}
 

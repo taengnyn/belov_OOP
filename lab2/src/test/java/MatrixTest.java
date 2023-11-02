@@ -385,4 +385,40 @@ class MatrixTest {
             assertTrue(columnMatrix[i][0] >= 0 && columnMatrix[i][0] <= 99);
         }
     }
+
+    @Test
+    public void testUpperTriangular() {
+        Matrix matrix = new Matrix(4, 3);
+        double[][] data = {{11, -37, 18}, {47, 20, 1}, {47, 21, 19.3}, {56.3, 5, -10}};
+        matrix.fillMatrix(data);
+
+        double[][] expectedMatrix = {{11, -37, 18}, {0, 20, 1}, {0, 0, 19.3}, {0, 0, 0}};
+
+        Matrix result = matrix.upperTriangular();
+        double[][] actualData = new double[4][3];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 3; j++) {
+                actualData[i][j] = result.getElement(i, j);
+            }
+        }
+        assertArrayEquals(expectedMatrix, actualData);
+    }
+
+    @Test
+    public void testLowerTriangular() {
+        Matrix matrix = new Matrix(3, 3);
+        double[][] data = {{11, -37, 18}, {47, 20, 1}, {47, 21, 19.3}};
+        matrix.fillMatrix(data);
+
+        double[][] expectedMatrix = {{11, 0, 0}, {47, 20, 0}, {47, 21, 19.3}};
+
+        Matrix result = matrix.lowerTriangular();
+        double[][] actualData = new double[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                actualData[i][j] = result.getElement(i, j);
+            }
+        }
+        assertArrayEquals(expectedMatrix, actualData);
+    }
 }
