@@ -140,7 +140,7 @@ public class Matrix {
         return resultMatrix;
     }
 
-    public static Matrix scalarMultiply(Matrix matrix, int scalar) {
+    public static Matrix scalarMultiply(Matrix matrix, double scalar) {
         Matrix resultMatrix = new Matrix(matrix.getRows(), matrix.getColumns());
         for (int i = 0; i < matrix.getRows(); i++) {
             for (int j = 0; j < matrix.getColumns(); j++) {
@@ -256,10 +256,90 @@ public class Matrix {
                 }
             }
         }
-        // Повертаємо результат
         return result;
     }
 
+
+    public double determinant() {
+        if (rows != columns) {
+            throw new IllegalArgumentException("The matrix must be square");
+        }
+
+        if (rows == 1) {
+            return arr[0][0];
+        }
+
+        if (rows == 2) {
+            return arr[0][0] * arr[1][1] - arr[0][1] * arr[1][0];
+        }
+
+        double det = 0;
+        for (int j = 0; j < columns; j++) {
+            det += arr[0][j] * cofactor(0, j);
+        }
+
+        return det;
+    }
+
+
+    private double cofactor(int i, int j) {
+        int sign = (i + j) % 2 == 0 ? 1 : -1;
+        return sign * minor(i, j);
+    }
+
+
+    public double minor(int i, int j) {
+        int minorRows = rows - 1;
+        int minorCols = columns - 1;
+        double[][] minorData = new double[minorRows][minorCols];
+
+        int m = 0;
+        for (int row = 0; row < rows; row++) {
+            if (row == i) {
+                continue;
+            }
+
+            int n = 0;
+            for (int col = 0; col < columns; col++) {
+                if (col == j) {
+                    continue;
+                }
+
+                minorData[m][n] = arr[row][col];
+                n++;
+            }
+
+            m++;
+        }
+
+        Matrix minorMatrix = new Matrix(minorRows, minorCols);
+        minorMatrix.fillMatrix(minorData);
+        return minorMatrix.determinant();
+    }
+
+
+    public Matrix inverse() {
+        double det = determinant();
+        if (det == 0) {
+            throw new ArithmeticException("The determinant is zero, the inverse matrix does not exist.");
+        }
+
+        int n = rows;
+        double[][] inverseData = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                inverseData[i][j] = roundToDecimalPlaces((cofactor(j, i) / det), 4);
+            }
+        }
+        Matrix res = new Matrix(n, n);
+        res.fillMatrix(inverseData);
+        return res;
+    }
+
+    public static double roundToDecimalPlaces(double value, int decimalPlaces) {
+        double factor = Math.pow(10, decimalPlaces);
+        return Math.round(value * factor) / factor;
+    }
 
     public int setRows(int rows) {
         return this.rows = rows;

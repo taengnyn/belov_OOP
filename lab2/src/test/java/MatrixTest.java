@@ -446,4 +446,49 @@ class MatrixTest {
         assertEquals(matrix1.hashCode(), matrix2.hashCode());
         assertNotEquals(matrix1.hashCode(), matrix3.hashCode());
     }
+
+    @Test
+    public void testDeterminant() {
+        double[][] data = {{2, 3}, {4, 5}};
+        Matrix matrix = new Matrix(2, 2);
+        matrix.fillMatrix(data);
+        double determinant = matrix.determinant();
+        assertEquals(2 * 5 - 3 * 4, determinant, 0.001);
+    }
+
+
+    @Test
+    public void testMinor() {
+        double[][] data = {{2, 3, 4}, {5, 6, 7}, {8, 9, 10}};
+        Matrix matrix = new Matrix(3, 3);
+        matrix.fillMatrix(data);
+        double minor = matrix.minor(1, 1);
+        assertEquals(2 * 10 - 4 * 8, minor, 0.001);
+    }
+
+    @Test
+    public void testInverse() {
+        double[][] data = {{2, 1}, {7, 4}};
+        Matrix matrix = new Matrix(2, 2);
+        matrix.fillMatrix(data);
+        Matrix inverseMatrix = matrix.inverse();
+
+        double[][] expectedMatrix = {{4.0, -1.0}, {-7.0, 2.0 }};
+
+        double[][] actualData = new double[2][2];
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                actualData[i][j] = inverseMatrix.getElement(i, j);
+            }
+        }
+        inverseMatrix.printMatrix();
+        assertArrayEquals(expectedMatrix, actualData);
+    }
+
+    @Test
+    public void testRoundToDecimalPlaces() {
+        double value = 3.14159265;
+        double roundedValue = Matrix.roundToDecimalPlaces(value, 2);
+        assertEquals(3.14, roundedValue, 0.001);
+    }
 }

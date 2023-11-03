@@ -2,11 +2,11 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        Matrix matrix1 = new Matrix(3, 3);
-        double[][] data1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        matrix1.fillMatrix(data1);
+        Matrix matrix = new Matrix(2, 2);
+        double[][] data = {{2, 1}, {7, 4}};
 
-        Matrix matrix2 = new Matrix(3, 3);
+
+        /*Matrix matrix2 = new Matrix(3, 3);
         double[][] data2 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix2.fillMatrix(data2);
 
@@ -19,9 +19,27 @@ public class Main {
 
 
         System.out.println("matrix1 hashCode: " + matrix1.hashCode());
-        System.out.println("matrix2 hashCode: " + matrix3.hashCode());
+        System.out.println("matrix2 hashCode: " + matrix3.hashCode());*/
+
+
+        matrix.fillMatrix(data);
+
+        System.out.println("Original Matrix:");
+        matrix.printMatrix();
+        try {
+            Matrix inverseMatrix = matrix.inverse();
+            if (inverseMatrix != null) {
+                System.out.println("\nInverse Matrix:");
+                inverseMatrix.printMatrix();
+            } else {
+                System.out.println("\nMatrix is singular, and its inverse does not exist.");
+            }
 
         }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }}
+
 
 
 }
