@@ -1,12 +1,12 @@
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Matrix matrix = new Matrix(2, 2);
         double[][] data = {{2, 1}, {7, 4}};
 
 
-        /*Matrix matrix2 = new Matrix(3, 3);
+        Matrix matrix2 = new Matrix(3, 3);
         double[][] data2 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         matrix2.fillMatrix(data2);
 
@@ -19,7 +19,7 @@ public class Main {
 
 
         System.out.println("matrix1 hashCode: " + matrix1.hashCode());
-        System.out.println("matrix2 hashCode: " + matrix3.hashCode());*/
+        System.out.println("matrix2 hashCode: " + matrix3.hashCode());
 
 
         matrix.fillMatrix(data);
@@ -38,9 +38,20 @@ public class Main {
         }
         catch (Exception e){
             System.out.println(e.getMessage());
-        }}
+        }}*/
 
+    public static void main(String[] args) {
+        GenericMatrix.Matrix<GenericMatrix.MatrixElement<Integer>> matrix = new GenericMatrix.Matrix<>(3, 3);
+        Integer[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
 
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                matrix.setElement(i, j, new GenericMatrix.MyMatrixElement<Integer>(data[i][j]));
+            }
+        }
+
+        System.out.println(matrix.toString());
+    }
 
 }
 
