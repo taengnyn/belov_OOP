@@ -328,7 +328,7 @@ public class Matrix {
         double[][] inverseData = new double[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                inverseData[i][j] = roundToDecimalPlaces((cofactor(j, i) / det), 4);
+                inverseData[i][j] = roundToDecimalPlaces((cofactor(j, i) / det), 10);
             }
         }
         Matrix res = new Matrix(n, n);

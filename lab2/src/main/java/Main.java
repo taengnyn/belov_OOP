@@ -1,57 +1,56 @@
 import java.util.Arrays;
 
 public class Main {
-    /*public static void main(String[] args) {
-        Matrix matrix = new Matrix(2, 2);
-        double[][] data = {{2, 1}, {7, 4}};
 
-
-        Matrix matrix2 = new Matrix(3, 3);
-        double[][] data2 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        matrix2.fillMatrix(data2);
-
-        Matrix matrix3 = new Matrix(3, 3);
-        double[][] data3 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 10}};
-        matrix3.fillMatrix(data3);
-
-        System.out.println("matrix1 equals matrix2: " + matrix1.equals(matrix2)); // Очікується true
-        System.out.println("matrix1 equals matrix3: " + matrix1.equals(matrix3)); // Очікується false
-
-
-        System.out.println("matrix1 hashCode: " + matrix1.hashCode());
-        System.out.println("matrix2 hashCode: " + matrix3.hashCode());
-
-
-        matrix.fillMatrix(data);
-
-        System.out.println("Original Matrix:");
-        matrix.printMatrix();
-        try {
-            Matrix inverseMatrix = matrix.inverse();
-            if (inverseMatrix != null) {
-                System.out.println("\nInverse Matrix:");
-                inverseMatrix.printMatrix();
-            } else {
-                System.out.println("\nMatrix is singular, and its inverse does not exist.");
-            }
-
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }}*/
 
     public static void main(String[] args) {
-        GenericMatrix.Matrix<GenericMatrix.MatrixElement<Integer>> matrix = new GenericMatrix.Matrix<>(3, 3);
-        Integer[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        GenericMatrix.Matrix<GenericMatrix.MatrixElement<String>> matrix = new GenericMatrix.Matrix<>(3, 3);
+        String[][] data = {{"1", "1", "1"}, {"a2", "b2", "c2"}, {"a1", "b1", "c1"}};
+
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                matrix.setElement(i, j, new GenericMatrix.MyMatrixElement<Integer>(data[i][j]));
+                int finalI = i;
+                int finalJ = j;
+                matrix.setElement(i, j, new GenericMatrix.MatrixElement<String>() {
+                    private String value = data[finalI][finalJ];
+
+                    @Override
+                    public String getValue() {
+                        return value;
+                    }
+
+                    @Override
+                    public void setValue(String value) {
+                        this.value = value;
+                    }
+                });
             }
         }
 
-        System.out.println(matrix.toString());
+        String t = "";
+
+        matrix.setElement(0, 0, new GenericMatrix.MatrixElement<String>() {
+            @Override
+            public String getValue() {
+                return t;
+            }
+
+            @Override
+            public void setValue(String value) {
+
+            }
+        });
+
+        // Виведіть матрицю на екран
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(matrix.getElement(i, j).getValue() + " ");
+            }
+            System.out.println();
+        }
     }
+
 
 }
 
